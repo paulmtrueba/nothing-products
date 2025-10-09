@@ -59,7 +59,7 @@ export function About() {
               </div>)}
           </div>
           <div className="mt-16 text-center">
-            <img src="/ChatGPT_Image_Oct_7%2C_2025%2C_09_21_21_PM.png" alt="Nothing brand" className="mx-auto max-w-full h-auto rounded-lg shadow-lg" />
+            <img src="/logo3.png" alt="Nothing brand" className="mx-auto max-w-full h-auto rounded-lg shadow-lg" />
             <p className="text-slate mt-4 italic">
               Our commitment to pure, microplastic-free silicone products
             </p>

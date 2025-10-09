@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
-import { ShoppingBag, Heart, Share2, ChevronLeft, Star, ChevronRight, Minus, Plus } from 'lucide-react';
+import { ShoppingBag, Heart, Share2, ChevronLeft, Star, ChevronRight, Minus, Plus, Image as ImageIcon } from 'lucide-react';
 import { useParams, Link } from 'react-router-dom';
+import { STLViewer } from '../components/STLViewer';
 export function ProductDetail() {
   const {
     id
@@ -10,6 +11,7 @@ export function ProductDetail() {
   const [quantity, setQuantity] = useState(1);
   const [activeTab, setActiveTab] = useState('description');
   const [activeImage, setActiveImage] = useState(0);
+  const [viewMode, setViewMode] = useState<'image' | '3d'>('image');
   // This would typically come from an API or data store
   // For demo purposes, we're hardcoding a product
   const product = {
@@ -42,24 +44,28 @@ export function ProductDetail() {
       name: 'Temperature Range',
       value: '-40°F to 446°F (-40°C to 230°C)'
     }],
-    images: ["/socialsight-ai-a33bc5aa-5ad7-49ff-a4ff-82ad4ff8f3f1_%282%29.png", "/socialsight-ai-a33bc5aa-5ad7-49ff-a4ff-82ad4ff8f3f1_%282%29.png", "/socialsight-ai-a33bc5aa-5ad7-49ff-a4ff-82ad4ff8f3f1_%282%29.png"],
+    images: ["/logo2.png", "/logo2.png", "/logo2.png"],
+    stlFile: '/75.220.5.stl',
     stock: 15
   };
   const relatedProducts = [{
     id: '2',
     name: 'Large Coffee Cup Lid',
     image: 'https://images.unsplash.com/photo-1550014730-28dfe926e5be?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
-    price: '$9.99'
+    price: '$9.99',
+    stlFile: '/75.220.5.stl'
   }, {
     id: '3',
     name: 'Small Coffee Cup Lid',
     image: 'https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
-    price: '$7.99'
+    price: '$7.99',
+    stlFile: '/75.220.5.stl'
   }, {
     id: '4',
     name: 'Silicone Baby Bottle Cap',
-    image: "/socialsight-ai-a33bc5aa-5ad7-49ff-a4ff-82ad4ff8f3f1_%282%29.png",
-    price: '$6.99'
+    image: "/logo2.png",
+    price: '$6.99',
+    stlFile: '/75.220.5.stl'
   }];
   const incrementQuantity = () => {
     if (quantity < product.stock) {
@@ -79,6 +85,9 @@ export function ProductDetail() {
   };
   const handlePrevImage = () => {
     setActiveImage(prev => (prev - 1 + product.images.length) % product.images.length);
+  };
+  const toggleViewMode = () => {
+    setViewMode(viewMode === 'image' ? '3d' : 'image');
   };
   return <div className="w-full min-h-screen bg-mist text-slate font-sans">
       <Header />
@@ -103,24 +112,42 @@ export function ProductDetail() {
           </Link>
           {/* Product Detail Section */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-16">
-            {/* Product Images */}
+            {/* Product Images/3D Viewer */}
             <div className="space-y-4">
+              <div className="flex justify-end mb-2">
+                <button onClick={toggleViewMode} className="flex items-center bg-aqua text-mist px-3 py-1 rounded-full text-sm font-medium hover:bg-opacity-90 transition-colors">
+                  {viewMode === 'image' ? <>
+                      <div size={16} className="mr-1" /> View 3D Model
+                    </> : <>
+                      <ImageIcon size={16} className="mr-1" /> View Images
+                    </>}
+                </button>
+              </div>
               <div className="relative bg-mist rounded-lg overflow-hidden h-96 shadow-lg">
-                <img src={product.images[activeImage]} alt={product.name} className="w-full h-full object-contain" />
-                {product.images.length > 1 && <>
-                    <button onClick={handlePrevImage} className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-70 p-2 rounded-full shadow-md hover:bg-opacity-100 transition-all" aria-label="Previous image">
-                      <ChevronLeft size={20} className="text-slate" />
-                    </button>
-                    <button onClick={handleNextImage} className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-70 p-2 rounded-full shadow-md hover:bg-opacity-100 transition-all" aria-label="Next image">
-                      <ChevronRight size={20} className="text-slate" />
-                    </button>
-                  </>}
+                {viewMode === 'image' ? <>
+                    <img src={product.images[activeImage]} alt={product.name} className="w-full h-full object-contain" />
+                    {product.images.length > 1 && <>
+                        <button onClick={handlePrevImage} className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-70 p-2 rounded-full shadow-md hover:bg-opacity-100 transition-all" aria-label="Previous image">
+                          <ChevronLeft size={20} className="text-slate" />
+                        </button>
+                        <button onClick={handleNextImage} className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-70 p-2 rounded-full shadow-md hover:bg-opacity-100 transition-all" aria-label="Next image">
+                          <ChevronRight size={20} className="text-slate" />
+                        </button>
+                      </>}
+                  </> : <STLViewer stlFile={product.stlFile} height="100%" backgroundColor="#F5F7F7" modelColor="#3FA7B6" className="rounded-lg" />}
               </div>
-              <div className="flex space-x-2 overflow-x-auto pb-2">
-                {product.images.map((image, index) => <button key={index} onClick={() => setActiveImage(index)} className={`w-20 h-20 rounded-md overflow-hidden border-2 ${activeImage === index ? 'border-aqua' : 'border-transparent'}`}>
-                    <img src={image} alt={`${product.name} ${index + 1}`} className="w-full h-full object-cover" />
-                  </button>)}
-              </div>
+              {viewMode === 'image' && <div className="flex space-x-2 overflow-x-auto pb-2">
+                  {product.images.map((image, index) => <button key={index} onClick={() => setActiveImage(index)} className={`w-20 h-20 rounded-md overflow-hidden border-2 ${activeImage === index ? 'border-aqua' : 'border-transparent'}`}>
+                      <img src={image} alt={`${product.name} ${index + 1}`} className="w-full h-full object-cover" />
+                    </button>)}
+                </div>}
+              {viewMode === '3d' && <div className="bg-aqua-light p-3 rounded-lg">
+                  <p className="text-slate text-sm text-center">
+                    <div size={16} className="inline-block mr-1" />
+                    Interact with the 3D model: click and drag to rotate, scroll
+                    to zoom
+                  </p>
+                </div>}
             </div>
             {/* Product Info */}
             <div>
@@ -214,8 +241,14 @@ export function ProductDetail() {
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
               {relatedProducts.map(product => <Link to={`/product/${product.id}`} key={product.id} className="bg-mist rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
-                  <div className="h-48 overflow-hidden">
-                    <img src={product.image} alt={product.name} className="w-full h-full object-cover transition-transform duration-500 hover:scale-110" />
+                  <div className="h-48 overflow-hidden relative group">
+                    <img src={product.image} alt={product.name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                    <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                      <div className="bg-aqua text-mist px-3 py-2 rounded-full text-sm font-medium transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+                        <div size={16} className="inline-block mr-1" />
+                        View 3D Model
+                      </div>
+                    </div>
                   </div>
                   <div className="p-4">
                     <div className="flex justify-between items-center mb-2">

@@ -6,7 +6,7 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center mb-4">
-              <img src="/oie_FdDMHR4IuNob_%282%29.png" alt="Nothing Logo" className="h-10 w-auto mr-2" />
+              <img src="/logo.png" alt="Nothing Logo" className="h-10 w-auto mr-2" />
               <span className="text-2xl font-bold text-aqua">Nothing</span>
             </div>
             <p className="text-mist text-opacity-80 mb-2 max-w-md">
