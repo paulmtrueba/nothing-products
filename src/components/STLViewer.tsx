@@ -14,8 +14,8 @@ export function STLViewer({
   stlFile,
   width = '100%',
   height = '100%',
-  backgroundColor = '#f5f5f5',
-  modelColor = '#3FA7B6',
+  backgroundColor = '#F7FBFB',
+  modelColor = '#47BDBF',
   className = '',
 }: STLViewerProps) {
   const containerRef = useRef<HTMLDivElement>(null)

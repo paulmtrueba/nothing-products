@@ -45,7 +45,7 @@ export function ProductDetail() {
       value: '-40°F to 446°F (-40°C to 230°C)'
     }],
     images: ["/logo2.png", "/logo2.png", "/logo2.png"],
-    stlFile: '/75.220.5.stl',
+    stlFile: '/cap_verylight_binary.stl',
     stock: 15
   };
   const relatedProducts = [{

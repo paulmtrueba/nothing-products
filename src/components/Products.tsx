@@ -9,21 +9,21 @@ export function Products() {
     name: 'Silicone Water Cap for Carboys',
     description: 'Universal silicone cap designed for 3 & 5 gallon glass carboys. Airtight, BPA-free, and prevents leaks and contamination.',
     image: "/logo2.png",
-    stlFile: '/75.220.5.stl',
+    stlFile: '/cap_verylight_binary.stl',
     price: '$12.99'
   }, {
     id: '2',
     name: 'Large Coffee Cup Lid',
     description: 'Reusable silicone lid fits 16, 22, and 32oz disposable cups. Heat-resistant, spill-proof, and eco-friendly alternative to plastic lids.',
     image: 'https://images.unsplash.com/photo-1550014730-28dfe926e5be?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
-    stlFile: '/75.220.5.stl',
+    stlFile: '/12oz_verylight_binary.stl',
     price: '$9.99'
   }, {
     id: '3',
     name: 'Small Coffee Cup Lid',
     description: 'Flexible silicone lid for 8oz disposable cups. Perfect for espresso and small beverages, with a secure seal to prevent spills.',
     image: 'https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
-    stlFile: '/75.220.5.stl',
+    stlFile: '/80z_verylight_binary.stl',
     price: '$7.99'
   }, {
     id: '4',
