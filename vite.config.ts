@@ -18,6 +18,16 @@ export default defineConfig({
       usePolling: true
     }
   },
+  resolve: {
+    alias: {
+      '@components': path.resolve(__dirname, './src/components'),
+      '@pages': path.resolve(__dirname, './src/pages'),
+      '@hooks': path.resolve(__dirname, './src/hooks'),
+      // '@lib': path.resolve(__dirname, './src/lib'),
+      '@types': path.resolve(__dirname, './src/types'),
+      '@utils': path.resolve(__dirname, './src/utils'),
+    },
+  },
   build: {
     outDir: 'dist', // Output directory for production build
     sourcemap: true, // Generate sourcemaps for debugging

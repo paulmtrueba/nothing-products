@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 import { ShoppingBag, Heart, Share2, ChevronLeft, Star, ChevronRight, Minus, Plus, Image as ImageIcon } from 'lucide-react';
 import { useParams, Link } from 'react-router-dom';
 import { STLViewer } from '../components/STLViewer';
+import { products } from "../utils/products";
 export function ProductDetail() {
   const {
-    id
+    productId
   } = useParams();
   const [quantity, setQuantity] = useState(1);
   const [activeTab, setActiveTab] = useState('description');
@@ -14,59 +15,13 @@ export function ProductDetail() {
   const [viewMode, setViewMode] = useState<'image' | '3d'>('image');
   // This would typically come from an API or data store
   // For demo purposes, we're hardcoding a product
-  const product = {
-    id: id || '1',
-    name: 'Silicone Water Cap for Carboys',
-    price: '$12.99',
-    rating: 4.8,
-    reviewCount: 124,
-    description: 'Universal silicone cap designed for 3 & 5 gallon glass carboys. Our premium food-grade silicone provides an airtight, BPA-free seal that prevents leaks and contamination. The flexible design fits multiple carboy sizes and is dishwasher safe for easy cleaning.',
-    features: ['Made from 100% pure silicone - no fillers or additives', 'Fits 3 & 5 gallon glass carboys with a universal design', 'Temperature resistant from -40°F to 446°F (-40°C to 230°C)', 'Dishwasher safe for easy cleaning', 'BPA-free, FDA-approved food-grade silicone', 'Airtight seal prevents contamination and leaks', 'Reusable and durable design for years of use', 'Free from microplastics and harmful chemicals'],
-    specifications: [{
-      name: 'Material',
-      value: '100% Pure Silicone'
-    }, {
-      name: 'Color',
-      value: 'Aqua Blue'
-    }, {
-      name: 'Dimensions',
-      value: '4.5" diameter (expandable to 5.5")'
-    }, {
-      name: 'Weight',
-      value: '3.2 oz (90g)'
-    }, {
-      name: 'Care',
-      value: 'Dishwasher safe, hand wash recommended'
-    }, {
-      name: 'Compatibility',
-      value: 'Standard 3 & 5 gallon glass carboys'
-    }, {
-      name: 'Temperature Range',
-      value: '-40°F to 446°F (-40°C to 230°C)'
-    }],
-    images: ["/logo2.png", "/logo2.png", "/logo2.png"],
-    stlFile: '/cap_verylight_binary.stl',
-    stock: 15
-  };
-  const relatedProducts = [{
-    id: '2',
-    name: 'Large Coffee Cup Lid',
-    image: 'https://images.unsplash.com/photo-1550014730-28dfe926e5be?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
-    price: '$9.99',
-    stlFile: '/75.220.5.stl'
-  }, {
-    id: '3',
-    name: 'Small Coffee Cup Lid',
-    image: 'https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
-    price: '$7.99',
-    stlFile: '/75.220.5.stl'
-  }, {
-    id: '4',
-    name: 'Silicone Baby Bottle Cap',
-    image: "/logo2.png",
-    price: '$6.99',
-    stlFile: '/75.220.5.stl'
-  }];
+  const product = products.find(product => product.id === productId);
+  const availableRelatedProducts = products.filter(product => product.id !== productId);
+  const sortDir = Math.floor(Math.random() * 2);
+  let relatedProducts = availableRelatedProducts.sort((a,b) => a.id - b.id);
+  if (sortDir === 1)
+    relatedProducts = availableRelatedProducts.sort((a,b) => b.id - a.id);
+  
   const incrementQuantity = () => {
     if (quantity < product.stock) {
       setQuantity(quantity + 1);
@@ -89,6 +44,13 @@ export function ProductDetail() {
   const toggleViewMode = () => {
     setViewMode(viewMode === 'image' ? '3d' : 'image');
   };
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+  }, []);
   return <div className="w-full min-h-screen bg-mist text-slate font-sans">
       <Header />
       <main className="pt-24 pb-16">
@@ -240,7 +202,7 @@ export function ProductDetail() {
               Related <span className="text-aqua">Products</span>
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-              {relatedProducts.map(product => <Link to={`/product/${product.id}`} key={product.id} className="bg-mist rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
+              {relatedProducts.slice(0,3).map(product => <Link to={`/product/${product.id}`} key={product.id} className="bg-mist rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
                   <div className="h-48 overflow-hidden relative group">
                     <img src={product.image} alt={product.name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
                     <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">

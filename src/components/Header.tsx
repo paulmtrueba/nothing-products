@@ -16,7 +16,7 @@ export function Header() {
   }, []);
   return <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-mist shadow-md py-2' : 'bg-transparent py-4'}`}>
       <div className="container mx-auto px-4 md:px-6 flex justify-between items-center">
-        <a href="#" className="flex items-center">
+        <a href="/" className="flex items-center">
           <img src="/logo.png" alt="Nothing Logo" className="h-12 w-auto" />
           <span className="ml-2 text-2xl font-bold text-aqua">Nothing</span>
         </a>

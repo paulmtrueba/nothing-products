@@ -71,7 +71,7 @@ export function ContactForm() {
                     </div>
                   </div>
                   <div className="mt-12 flex flex-col items-center">
-                    <img src="/oie_FdDMHR4IuNob_%282%29.png" alt="Nothing Logo" className="w-48 h-48 mb-4" />
+                    <img src="/logo2.png" alt="Nothing Logo" className="w-48 h-48 mb-4" />
                     <p className="text-center text-mist text-opacity-90 font-medium">
                       Free From Microplastics
                     </p>
