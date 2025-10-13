@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Send, Check, AlertCircle, Mail, User, MessageSquare } from 'lucide-react';
-import { useProductContext } from "./ProductProvider";
 type FormData = {
   name: string;
   email: string;
@@ -9,9 +8,6 @@ type FormData = {
   message: string;
 };
 export function ContactForm() {
-  const { mailSending, status, fetchTestMailgun } = useProductContext();
-  console.log(useProductContext());
-
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
@@ -24,20 +20,19 @@ export function ContactForm() {
     reset
   } = useForm<FormData>();
   const onSubmit = async (data: FormData) => {
-    fetchTestMailgun(data);
-    // setIsSubmitting(true);
-    // setError('');
-    // try {
-    //   // Simulate API call
-    //   await new Promise(resolve => setTimeout(resolve, 1500));
-    //   console.log('Form submitted:', data);
-    //   setIsSubmitted(true);
-    //   reset();
-    // } catch (err) {
-    //   setError('There was an error submitting your message. Please try again.');
-    // } finally {
-    //   setIsSubmitting(false);
-    // }
+    setIsSubmitting(true);
+    setError('');
+    try {
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      console.log('Form submitted:', data);
+      setIsSubmitted(true);
+      reset();
+    } catch (err) {
+      setError('There was an error submitting your message. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
   return <section id="contact" className="py-20 bg-sand bg-opacity-20">
       <div className="container mx-auto px-4 md:px-6">
@@ -83,7 +78,7 @@ export function ContactForm() {
                   </div>
                 </div>
                 <div className="p-8 md:p-12">
-                  {status !== "" ? <div className="h-full flex flex-col items-center justify-center text-center">
+                  {isSubmitted ? <div className="h-full flex flex-col items-center justify-center text-center">
                       <div className="bg-aqua-light rounded-full p-4 mb-4">
                         <Check className="h-8 w-8 text-aqua" />
                       </div>
@@ -94,11 +89,10 @@ export function ContactForm() {
                         Your message has been sent successfully. We'll get back
                         to you as soon as possible.
                       </p>
-                      <button onClick={() => setStatus("")} className="px-6 py-2 bg-aqua text-mist rounded-md hover:bg-opacity-90 transition-colors">
+                      <button onClick={() => setIsSubmitted(false)} className="px-6 py-2 bg-aqua text-mist rounded-md hover:bg-opacity-90 transition-colors">
                         Send Another Message
                       </button>
                     </div> : <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-                      {status}
                       {error && <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md flex items-center">
                           <AlertCircle className="h-5 w-5 mr-2 flex-shrink-0" />
                           <p>{error}</p>
@@ -161,8 +155,8 @@ export function ContactForm() {
                           </p>}
                       </div>
                       <div>
-                        <button type="submit" disabled={mailSending} className={`w-full flex items-center justify-center px-6 py-3 bg-aqua text-mist rounded-md font-medium hover:bg-opacity-90 transition-colors ${mailSending ? 'opacity-70 cursor-not-allowed' : ''}`}>
-                          {mailSending ? <>
+                        <button type="submit" disabled={isSubmitting} className={`w-full flex items-center justify-center px-6 py-3 bg-aqua text-mist rounded-md font-medium hover:bg-opacity-90 transition-colors ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''}`}>
+                          {isSubmitting ? <>
                               <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-mist" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>

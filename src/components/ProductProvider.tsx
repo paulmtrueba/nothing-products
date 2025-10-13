@@ -16,8 +16,6 @@ const ProductContextProvider = (
         mailSending,
         status,
         fetchMailgun,
-        fetchTestMailgun,
-        setStatus,
     } = useMailgun();
 
     return (
@@ -26,8 +24,6 @@ const ProductContextProvider = (
                 mailSending,
                 status,
                 fetchMailgun,
-                fetchTestMailgun,
-                setStatus,
             }}
         >
             {children}
