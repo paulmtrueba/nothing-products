@@ -7,7 +7,9 @@ export default defineConfig({
   resolve: {
     alias: {
       '@components': path.resolve(__dirname, './src/components'),
+      '@hooks': path.resolve(__dirname, './src/hooks'),
       '@pages': path.resolve(__dirname, './src/pages'),
+      '@types': path.resolve(__dirname, './src/types'),
       '@utils': path.resolve(__dirname, './src/utils'),
     },
   },
@@ -17,16 +19,6 @@ export default defineConfig({
     watch: {
       usePolling: true
     }
-  },
-  resolve: {
-    alias: {
-      '@components': path.resolve(__dirname, './src/components'),
-      '@pages': path.resolve(__dirname, './src/pages'),
-      '@hooks': path.resolve(__dirname, './src/hooks'),
-      // '@lib': path.resolve(__dirname, './src/lib'),
-      '@types': path.resolve(__dirname, './src/types'),
-      '@utils': path.resolve(__dirname, './src/utils'),
-    },
   },
   build: {
     outDir: 'dist', // Output directory for production build

@@ -19,7 +19,7 @@ export async function handler(event) {
 		const { name, email, message } = JSON.parse(event.body);
 
 		const result = await mg.messages.create(process.env.MAILGUN_DOMAIN, {
-			from: `Contact Form <mailgun@${process.env.MAILGUN_DOMAIN}>`,
+			from: `Nothing Contact Form <mailgun@${process.env.MAILGUN_DOMAIN}>`,
 			to: ["pault.tripwirearts@gmail.com"],
 			subject: `New message from ${name}`,
 			text: `${message}\n\nReply to: ${email}`,
@@ -39,5 +39,3 @@ export async function handler(event) {
 		};
 	}
 }
-
-app.listen(3001, () => console.log("server runnign on http://localhost:3001"))
