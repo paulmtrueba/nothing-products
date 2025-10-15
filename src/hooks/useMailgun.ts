@@ -7,7 +7,7 @@ export const useMailgun = () => {
 	const fetchMailgun = async (body: any) => {
 		setMailSending(true);
 		try {
-			const res = await fetch("/.netlify/functions/send-email", {
+			const res = await fetch("/.netlify/functions/send-test", {
 				method: "POST",
 				headers: { "content-type": "application/json" },
 				body: JSON.stringify(body),
