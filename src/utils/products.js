@@ -30,6 +30,7 @@ export const products = [{
     }],
     images: ["/logo2.png", "/logo2.png", "/logo2.png"],
     stlFile: '/cap_extreme_binary.stl',
+    glbFile: "/cap_micro_glb.glb",
     stock: 15
   }, {
     id: '2',
@@ -63,6 +64,7 @@ export const products = [{
     }],
     images: ["/logo2.png", "/logo2.png", "/logo2.png"],
     stlFile: '/12oz_verylight_binary.stl',
+    glbFile: "/12ozLid_micro_glb.glb",
     stock: 15
   }, {
     id: '3',
@@ -96,6 +98,7 @@ export const products = [{
     }],
     images: ["/logo2.png", "/logo2.png", "/logo2.png"],
     stlFile: '/80z_verylight_binary.stl',
+    glbFile: "/8ozLid_micro_glb.glb",
     stock: 15
   }, {
     id: '4',
@@ -129,6 +132,7 @@ export const products = [{
     }],
     images: ["/logo2.png", "/logo2.png", "/logo2.png"],
     stlFile: '/75.220.5.stl',
+    glbFile: "",
     stock: 15
   }, {
     id: '5',
@@ -162,6 +166,7 @@ export const products = [{
     }],
     images: ["/logo2.png", "/logo2.png", "/logo2.png"],
     stlFile: '/75.220.5.stl',
+    glbFile: "",
     stock: 15
   }, {
     id: '6',
@@ -195,6 +200,7 @@ export const products = [{
     }],
     images: ["/logo2.png", "/logo2.png", "/logo2.png"],
     stlFile: '/75.220.5.stl',
+    glbFile: "",
     stock: 15
   }, {
     id: '7',
@@ -228,5 +234,6 @@ export const products = [{
     }],
     images: ["/logo2.png", "/logo2.png", "/logo2.png"],
     stlFile: '/75.220.5.stl',
+    glbFile: "",
     stock: 15
   }];

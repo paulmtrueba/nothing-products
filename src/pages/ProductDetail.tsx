@@ -3,7 +3,7 @@ import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 import { ShoppingBag, Heart, Share2, ChevronLeft, Star, ChevronRight, Minus, Plus, Image as ImageIcon } from 'lucide-react';
 import { useParams, Link } from 'react-router-dom';
-import { STLViewer } from '../components/STLViewer';
+import { GLTFViewer } from '../components';
 import { usePageTracking } from "../hooks";
 import { products } from "../utils/products";
 export function ProductDetail() {
@@ -98,7 +98,7 @@ export function ProductDetail() {
                           <ChevronRight size={20} className="text-slate" />
                         </button>
                       </>}
-                  </> : <STLViewer stlFile={product.stlFile} height="100%" backgroundColor="#F5F7F7" modelColor="#3FA7B6" className="rounded-lg" />}
+                  </> : <GLTFViewer gltfFile={product.glbFile} height="100%" backgroundColor="#F5F7F7" modelColor="#3FA7B6" className="rounded-lg" />}
               </div>
               {viewMode === 'image' && <div className="flex space-x-2 overflow-x-auto pb-2">
                   {product.images.map((image, index) => <button key={index} onClick={() => setActiveImage(index)} className={`w-20 h-20 rounded-md overflow-hidden border-2 ${activeImage === index ? 'border-aqua' : 'border-transparent'}`}>
