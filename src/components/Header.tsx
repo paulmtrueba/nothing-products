@@ -21,7 +21,7 @@ export function Header() {
           <span className="ml-2 text-2xl font-bold text-aqua">Nothing</span>
         </a>
         <nav className="hidden md:flex space-x-8">
-          {['Home', 'About', 'Products', 'Microplastics', 'Contact'].map(item => <a key={item} href={`#${item.toLowerCase()}`} className="text-slate hover:text-aqua transition-colors font-medium">
+          {['Home', 'About', 'Products', 'Microplastics', 'Contact'].map(item => <a key={item} href={`/#${item.toLowerCase()}`} className="text-slate hover:text-aqua transition-colors font-medium">
                 {item}
               </a>)}
         </nav>
@@ -34,7 +34,7 @@ export function Header() {
       {/* Mobile menu */}
       {mobileMenuOpen && <div className="md:hidden bg-mist w-full py-4 px-4 shadow-lg">
           <div className="flex flex-col space-y-4">
-            {['Home', 'About', 'Products', 'Microplastics', 'Contact'].map(item => <a key={item} href={`#${item.toLowerCase()}`} className="text-slate hover:text-aqua transition-colors py-2 font-medium" onClick={() => setMobileMenuOpen(false)}>
+            {['Home', 'About', 'Products', 'Microplastics', 'Contact'].map(item => <a key={item} href={`/#${item.toLowerCase()}`} className="text-slate hover:text-aqua transition-colors py-2 font-medium" onClick={() => setMobileMenuOpen(false)}>
                   {item}
                 </a>)}
           </div>

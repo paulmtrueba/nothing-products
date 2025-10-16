@@ -46,6 +46,15 @@ export function ProductDetail() {
   const toggleViewMode = () => {
     setViewMode(viewMode === 'image' ? '3d' : 'image');
   };
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+  }, [productId]);
+
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -53,6 +62,7 @@ export function ProductDetail() {
       behavior: 'smooth'
     });
   }, []);
+
   return <div className="w-full min-h-screen bg-mist text-slate font-sans">
       <Header />
       <main className="pt-24 pb-16">
