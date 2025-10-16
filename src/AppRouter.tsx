@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { App } from './App';
 import { ProductContextProvider } from "./components";
 import { ProductDetail } from './pages';
+
 export function AppRouter() {
   return <BrowserRouter>
       <ProductContextProvider>

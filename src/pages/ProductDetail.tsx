@@ -4,8 +4,10 @@ import { Footer } from '../components/Footer';
 import { ShoppingBag, Heart, Share2, ChevronLeft, Star, ChevronRight, Minus, Plus, Image as ImageIcon } from 'lucide-react';
 import { useParams, Link } from 'react-router-dom';
 import { STLViewer } from '../components/STLViewer';
+import { usePageTracking } from "../hooks";
 import { products } from "../utils/products";
 export function ProductDetail() {
+  usePageTracking();
   const {
     productId
   } = useParams();
